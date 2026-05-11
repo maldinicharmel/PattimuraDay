@@ -22,7 +22,6 @@ body{cursor:auto}
 
 /* ══ CANVAS ══ */
 #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
-#bg-audio{display:none}
 
 /* ══ LOADER ══ */
 #loader{position:fixed;inset:0;z-index:99990;background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .9s ease}
@@ -245,7 +244,6 @@ footer{background:#080404;padding:36px 24px;text-align:center;border-top:1px sol
 <div id="cursor"></div>
 <div id="cursor-trail"></div>
 <canvas id="bg-canvas"></canvas>
-<audio id="bg-audio" src="Lestarikan Tifa Totobuang, alat musik tradisional Maluku.mp3" preload="auto" loop></audio>
 
 <!-- LOADER -->
 <div id="loader">
@@ -463,25 +461,6 @@ document.querySelectorAll('.ev-card,.tl-item,.inf-item,.h-pill,.h-theme').forEac
 
 /* ══ LOADER ══ */
 window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('gone'),900));
-
-window.addEventListener('load',()=>{
-  const audio = document.getElementById('bg-audio');
-  if(audio){
-    const tryPlay = ()=>{
-      const promise = audio.play();
-      if(promise!==undefined){
-        promise.catch(()=>{});
-      }
-    };
-    tryPlay();
-    document.addEventListener('click',function startAudio(){
-      if(audio.paused){
-        tryPlay();
-      }
-      document.removeEventListener('click',startAudio);
-    },{once:true});
-  }
-});
 
 /* ══ PARTICLES ══ */
 const cv=document.getElementById('bg-canvas'),cx=cv.getContext('2d');
