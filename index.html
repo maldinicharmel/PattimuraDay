@@ -467,12 +467,19 @@ window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loade
 window.addEventListener('load',()=>{
   const audio = document.getElementById('bg-audio');
   if(audio){
-    const playPromise = audio.play();
-    if(playPromise!==undefined){
-      playPromise.catch(() => {
-        // Autoplay may be blocked by browser; audio will remain ready for user interaction.
-      });
-    }
+    const tryPlay = ()=>{
+      const promise = audio.play();
+      if(promise!==undefined){
+        promise.catch(()=>{});
+      }
+    };
+    tryPlay();
+    document.addEventListener('click',function startAudio(){
+      if(audio.paused){
+        tryPlay();
+      }
+      document.removeEventListener('click',startAudio);
+    },{once:true});
   }
 });
 
